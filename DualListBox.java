@@ -1,6 +1,5 @@
 package predictions;
 
-import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -53,11 +52,11 @@ public class DualListBox extends JPanel {
 
 	private boolean predictOrUpdate;
 
-	private SortedListModel sourceListModel;
+	private SortedListModel<Object> sourceListModel;
 
 	private JList destList;
 
-	private SortedListModel destListModel;
+	private SortedListModel<Object> destListModel;
 
 	private JLabel destLabel;
 
@@ -110,7 +109,7 @@ public class DualListBox extends JPanel {
 		fillListModel(destListModel, newValue);
 	}
 
-	private void fillListModel(SortedListModel model, ListModel newValues) {
+	private void fillListModel(SortedListModel<Object> model, ListModel newValues) {
 		int size = newValues.getSize();
 		for (int i = 0; i < size; i++) {
 			model.add(newValues.getElementAt(i));
@@ -130,7 +129,7 @@ public class DualListBox extends JPanel {
 		fillListModel(destListModel, newValue);
 	}
 
-	private void fillListModel(SortedListModel model, Object newValues[]) {
+	private void fillListModel(SortedListModel<Object> model, Object newValues[]) {
 		model.addAll(newValues);
 	}
 
@@ -165,7 +164,7 @@ public class DualListBox extends JPanel {
 		setBorder(BorderFactory.createEtchedBorder());
 		setLayout(new GridBagLayout());
 		sourceLabel = new JLabel(DEFAULT_SOURCE_CHOICE_LABEL);
-		sourceListModel = new SortedListModel();
+		sourceListModel = new SortedListModel<Object>();
 		sourceList = new JList(sourceListModel);
 		add(sourceLabel, new GridBagConstraints(0, 0, 1, 1, 0, 0, GridBagConstraints.CENTER, GridBagConstraints.NONE,
 				EMPTY_INSETS, 0, 0));
@@ -199,7 +198,7 @@ public class DualListBox extends JPanel {
 		runButton.addActionListener(new RunListener());
 
 		destLabel = new JLabel(DEFAULT_DEST_CHOICE_LABEL);
-		destListModel = new SortedListModel();
+		destListModel = new SortedListModel<Object>();
 		destList = new JList(destListModel);
 		add(destLabel, new GridBagConstraints(2, 0, 1, 1, 0, 0, GridBagConstraints.CENTER, GridBagConstraints.NONE,
 				EMPTY_INSETS, 0, 0));
@@ -212,7 +211,7 @@ public class DualListBox extends JPanel {
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		DualListBox dual = new DualListBox();
 		dual.addSourceElements(rs.toArray());
-		f.getContentPane().add(dual, BorderLayout.CENTER);
+		f.getContentPane().add(dual, java.awt.BorderLayout.CENTER);
 		f.setSize(400, 300);
 		f.setVisible(true);
 	}
@@ -272,7 +271,7 @@ class SortedListModel<T> extends AbstractListModel<T> {
 	SortedSet<T> model;
 
 	public SortedListModel() {
-		model = new TreeSet();
+		model = new TreeSet<T>();
 	}
 
 	public int getSize() {
@@ -291,7 +290,7 @@ class SortedListModel<T> extends AbstractListModel<T> {
 	}
 
 	public void addAll(Object elements[]) {
-		Collection c = Arrays.asList(elements);
+		Collection<T> c = (Collection<T>) Arrays.asList(elements);
 		model.addAll(c);
 		fireContentsChanged(this, 0, getSize());
 	}
@@ -309,7 +308,7 @@ class SortedListModel<T> extends AbstractListModel<T> {
 		return model.first();
 	}
 
-	public Iterator iterator() {
+	public Iterator<T> iterator() {
 		return model.iterator();
 	}
 
