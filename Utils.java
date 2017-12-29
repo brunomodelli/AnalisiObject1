@@ -1,7 +1,6 @@
 package utils;
 
 import java.io.*;
-
 import org.apache.commons.math3.distribution.TDistribution;
 import org.apache.commons.math3.util.CombinatoricsUtils;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -11,22 +10,13 @@ import org.cyberneko.html.HTMLScanner.CurrentEntity;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import charts.LineChart;
 import constants.MinMaxOdds;
 import entries.AsianEntry;
 import entries.FinalEntry;
 import entries.FullEntry;
 import entries.HTEntry;
-import main.ExtendedFixture;
-import main.FullFixture;
-import main.GoalLines;
-import main.Line;
-import main.Player;
-import main.PlayerFixture;
-import main.Result;
-import main.SQLiteJDBC;
-import main.Test.DataType;
+import main.*;
 import results.Results;
 import scraper.Names;
 import scraper.Scraper;
